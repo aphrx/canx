@@ -1,0 +1,4 @@
+candump vcan0 | cantools decode nissan_leaf_2018.dbc
+cansniffer vcan0
+cat nissan_leaf_candump.log | canplayer vcan0=slcan0
+cansend vcan0 1F334455#1122334455667788

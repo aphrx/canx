@@ -56,9 +56,6 @@ ttk.Label(mainframe, textvariable=g).grid(row=2, column=2)
 ttk.Label(mainframe, text="Doors:  ").grid(row=3, column=1)
 ttk.Label(mainframe, textvariable=doorlights).grid(row=3, column=2)
 
-ttk.Label(mainframe, text="Blinkers:  ").grid(row=3, column=1)
-ttk.Label(mainframe, textvariable=blinkers).grid(row=3, column=2)
-
 print(i)
 
 root.after(5, fetch)
