@@ -10,7 +10,6 @@ can_bus = can.interface.Bus('vcan0', bustype='socketcan')
 speed_message = db.get_message_by_name('WHEEL_SPEEDS_REAR')
 gearbox_message = db.get_message_by_name('GEARBOX')
 doorlight_message = db.get_message_by_name('DOORS_LIGHTS')
-blinker_message = db.get_message_by_name('LIGHTS')
 
 
 def setSpeed(speed):
@@ -40,15 +39,6 @@ def setDoorStates():
 
     print(message)
 
-def setBlinkerStates():
-    l = left_blinker.get()
-    r = right_blinker.get()
-    data = blinker_message.encode({'LEFT_BLINKER': l, 'RIGHT_BLINKER': r})
-    message = can.Message(arbitration_id=blinker_message.frame_id, data=data)
-    can_bus.send(message)
-
-    print(message)
-
 root = tk.Tk()
 root.title("Canx Sender")
 
@@ -69,8 +59,7 @@ door_fr = tk.IntVar()
 door_rl = tk.IntVar()
 door_rr = tk.IntVar()
 
-left_blinker = tk.IntVar()
-right_blinker = tk.IntVar()
+
 
 ttk.Label(mainframe, text="Speed Slider:  ").grid(row=1, column=0)
 ttk.Scale(mainframe, from_=0, to_=100, length=300, command=lambda s: [slider.set('%0.2d' % float(s)), setSpeed(int(float(s)))]).grid(row=1, column=1, columnspan = 4, sticky = tk.W+tk.E)
@@ -83,9 +72,5 @@ ttk.Checkbutton(mainframe, text="FL", variable=door_fl, command=setDoorStates).g
 ttk.Checkbutton(mainframe, text="FR", variable=door_fr, command=setDoorStates).grid(row=5, column=2)
 ttk.Checkbutton(mainframe, text="RL", variable=door_rl, command=setDoorStates).grid(row=5, column=3)
 ttk.Checkbutton(mainframe, text="RR", variable=door_rr, command=setDoorStates).grid(row=5, column=4)
-
-ttk.Label(mainframe, text="Blinkers:  ").grid(row=6, column=0)
-ttk.Checkbutton(mainframe, text="L", variable=left_blinker, command=setBlinkerStates).grid(row=6, column=1)
-ttk.Checkbutton(mainframe, text="R", variable=right_blinker, command=setBlinkerStates).grid(row=6, column=2)
 
 root.mainloop()
