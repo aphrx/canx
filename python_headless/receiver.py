@@ -19,10 +19,10 @@ while(True):
     message = can_bus.recv()
 
     if(message.arbitration_id == 645):
-        print(db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
+        print("Speed: " + db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
 
     elif(message.arbitration_id == 1057):
-        print(db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
+        print("Gears: " + db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
 
     elif(message.arbitration_id == 1549):
 
@@ -34,7 +34,7 @@ while(True):
 
         temp = str(fl) + " " + str(fr) + " " + str(rl) + " " + str(rr)
 
-        print(temp)
+        print("Doors: " + temp)
 
     elif(message.arbitration_id == 856):
 
@@ -44,9 +44,9 @@ while(True):
 
         temp = str(l) + " " + str(r)
 
-        print(temp)
-    else:
-        print(message.arbitration_id)
+        print("Blinkers: " + temp)
+    #else:
+    #    print(message.arbitration_id)
 
 
 
