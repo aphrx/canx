@@ -15,7 +15,7 @@ rr = 0              # Rear Right Door
 l = 0               # Left Blinker
 r = 0               # Right Blinker
 
-while(true):
+while(True):
     message = can_bus.recv()
 
     s.sendall(str(message) + "\n")
@@ -27,8 +27,6 @@ while(true):
         g.set(db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
 
     elif(message.arbitration_id == 1549):
-
-        global fl, fr, rl, rr
 
         fl = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_FL']
         fr = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_FR']
@@ -42,7 +40,6 @@ while(true):
 
     elif(message.arbitration_id == 856):
 
-        global l, r
 
         l = db.decode_message(message.arbitration_id, message.data)['LEFT_BLINKER']
         r = db.decode_message(message.arbitration_id, message.data)['RIGHT_BLINKER']
