@@ -3,14 +3,10 @@ import sys
 import cantools
 import can
 import socket
-import tkinter as tk
-from tkinter import ttk
 
 db = cantools.database.load_file('nissan_leaf_2018.dbc')
 can_bus = can.interface.Bus('vcan0', bustype='socketcan')
 
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 5000         # The port used by the server
 
 fl = 0              # Front Left Door
 fr = 0              # Front Right Door
@@ -19,12 +15,7 @@ rr = 0              # Rear Right Door
 l = 0               # Left Blinker
 r = 0               # Right Blinker
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
-
-
-def fetch():
-    global i, g, s
+while(true):
     message = can_bus.recv()
 
     s.sendall(str(message) + "\n")
@@ -34,7 +25,7 @@ def fetch():
 
     elif(message.arbitration_id == 1057):
         g.set(db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
-    
+
     elif(message.arbitration_id == 1549):
 
         global fl, fr, rl, rr
@@ -61,42 +52,8 @@ def fetch():
         blinkers.set(temp)
     else:
         print(message.arbitration_id)
-    root.after(5, fetch)
-    print(message)
 
 
-root = tk.Tk()
-root.title("Canx Receiver")
-
-mainframe = ttk.Frame(root, padding="24 24 24 24")
-mainframe.grid(column=0, row=0, sticky=('N', 'W', 'E', 'S'))
-
-i = tk.IntVar()
-g = tk.IntVar()
-doorlights = tk.StringVar()
-blinkers = tk.StringVar()
-i.set(0)
-g.set("P")
-doorlights.set("0 0 0 0")
-blinkers.set("0 0")
-
-ttk.Label(mainframe, text="Speed:  ").grid(row=1, column=1)
-ttk.Label(mainframe, textvariable=i).grid(row=1, column=2)
-ttk.Label(mainframe, text="  kph").grid(row=1, column=3)
-
-ttk.Label(mainframe, text="Gear:  ").grid(row=2, column=1)
-ttk.Label(mainframe, textvariable=g).grid(row=2, column=2)
-
-ttk.Label(mainframe, text="Doors:  ").grid(row=3, column=1)
-ttk.Label(mainframe, textvariable=doorlights).grid(row=3, column=2)
-
-ttk.Label(mainframe, text="Blinkers:  ").grid(row=4, column=1)
-ttk.Label(mainframe, textvariable=blinkers).grid(row=4, column=2)
-
-print(i)
-
-root.after(5, fetch)
-root.mainloop()
 
 
 
