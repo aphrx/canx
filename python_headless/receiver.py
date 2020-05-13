@@ -4,7 +4,7 @@ import cantools
 import can
 import socket
 
-db = cantools.database.load_file('nissan_leaf_2018.dbc')
+db = cantools.database.load_file('../nissan_leaf_2018.dbc')
 can_bus = can.interface.Bus('vcan0', bustype='socketcan')
 
 
