@@ -17,12 +17,12 @@ r = 0               # Right Blinker
 
 while(True):
     message = can_bus.recv()
-    
+
     if(message.arbitration_id == 645):
-        i.set(db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
+        print(db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
 
     elif(message.arbitration_id == 1057):
-        g.set(db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
+        print(db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
 
     elif(message.arbitration_id == 1549):
 
@@ -34,7 +34,7 @@ while(True):
 
         temp = str(fl) + " " + str(fr) + " " + str(rl) + " " + str(rr)
 
-        doorlights.set(temp)
+        print(temp)
 
     elif(message.arbitration_id == 856):
 
@@ -44,7 +44,7 @@ while(True):
 
         temp = str(l) + " " + str(r)
 
-        blinkers.set(temp)
+        print(temp)
     else:
         print(message.arbitration_id)
 
