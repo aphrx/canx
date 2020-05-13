@@ -17,9 +17,7 @@ r = 0               # Right Blinker
 
 while(True):
     message = can_bus.recv()
-
-    s.sendall(str(message) + "\n")
-
+    
     if(message.arbitration_id == 645):
         i.set(db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
 
