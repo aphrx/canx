@@ -2,7 +2,7 @@ import cantools
 import can
 import time
 
-db = cantools.database.load_file('nissan_leaf_2018.dbc')
+db = cantools.database.load_file('../nissan_leaf_2018.dbc')
 can_bus = can.interface.Bus('vcan0', bustype='socketcan')
 
 speed_message = db.get_message_by_name('WHEEL_SPEEDS_REAR')
