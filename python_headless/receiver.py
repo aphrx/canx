@@ -57,11 +57,11 @@ while(True):
         print("Speed: " + speed)
         s = speed.rjust(4)
         for digit in range(4):
+            GPIO.output(digits[digit], 0)
             for loop in range(0,7):
                 GPIO.output(segments[loop], num[s[digit]][loop])
-            GPIO.output(digits[digit], 0)
+            
             time.sleep(0.01)
-            GPIO.output(digits[digit], 0)
  
 
     elif(message.arbitration_id == 1057):
