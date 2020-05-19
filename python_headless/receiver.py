@@ -64,7 +64,7 @@ while(True):
                 else:
                     GPIO.output(25, 0)
             GPIO.output(digits[digit], 0)
-            time.sleep(1)
+            time.sleep(0.000000001)
             GPIO.output(digits[digit], 1)
 
     elif(message.arbitration_id == 1057):
