@@ -63,7 +63,6 @@ while(True):
                     GPIO.output(25, 1)
                 else:
                     GPIO.output(25, 0)
-            GPIO.output(digits[digit], 0)
             time.sleep(0.01)
             GPIO.output(digits[digit], 1)
 
