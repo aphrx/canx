@@ -53,7 +53,7 @@ while(True):
     message = can_bus.recv()
 
     if(message.arbitration_id == 645):
-        speed = str( db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
+        speed = str(int(db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR']))
         print("Speed: " + speed)
         s = speed.rjust(4)
         for digit in range(4):
