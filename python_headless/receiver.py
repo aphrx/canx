@@ -61,7 +61,7 @@ while(True):
                 GPIO.output(segments[loop], num[s[digit]][loop])
             GPIO.output(digits[digit], 0)
             time.sleep(0.01)
-            GPIO.output(digits[digit], 1)
+            GPIO.output(digits[digit], 0)
  
 
     elif(message.arbitration_id == 1057):
