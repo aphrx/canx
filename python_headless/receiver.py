@@ -63,8 +63,8 @@ while(True):
                     GPIO.output(25, 1)
                 else:
                     GPIO.output(25, 0)
-            time.sleep(0.01)
             GPIO.output(digits[digit], 0)
+            GPIO.output(digits[digit], 1)
 
     elif(message.arbitration_id == 1057):
         print("Gears: " + db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
