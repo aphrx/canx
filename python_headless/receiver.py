@@ -19,7 +19,7 @@ while(True):
     message = can_bus.recv()
 
     if(message.arbitration_id == 645):
-        print("Speed: " + db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR'])
+        print("Speed: " + str( db.decode_message(message.arbitration_id, message.data)['WHEEL_SPEED_RR']))
 
     elif(message.arbitration_id == 1057):
         print("Gears: " + db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
