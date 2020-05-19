@@ -60,8 +60,10 @@ while(True):
             for loop in range(0,7):
                 GPIO.output(segments[loop], num[s[digit]][loop])
                 if (int(time.ctime()[18:19])%2 == 0) and (digit == 1):
+                    print("huh?")
                     GPIO.output(25, 1)
                 else:
+                    print("wut")
                     GPIO.output(25, 0)
             GPIO.output(digits[digit], 0)
             time.sleep(0.01)
