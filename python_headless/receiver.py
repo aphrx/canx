@@ -38,6 +38,9 @@ num = {' ':(0,0,0,0,0,0,0),
     '8':(1,1,1,1,1,1,1),
     '9':(1,1,1,1,0,1,1)}
 
+
+speed = 0
+
 db = cantools.database.load_file('../nissan_leaf_2018.dbc')
 can_bus = can.interface.Bus('vcan0', bustype='socketcan')
 
