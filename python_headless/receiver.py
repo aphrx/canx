@@ -57,39 +57,29 @@ while(True):
         print("Speed: " + speed)
         s = speed.rjust(4)
         for digit in range(4):
-            GPIO.output(digits[digit], 0)
             for loop in range(0,7):
                 GPIO.output(segments[loop], num[s[digit]][loop])
-            
+            GPIO.output(digits[digit], 0)
             time.sleep(0.01)
+            GPIO.output(digits[digit], 1)
  
 
     elif(message.arbitration_id == 1057):
         print("Gears: " + db.decode_message(message.arbitration_id, message.data)['GEAR_SHIFTER'])
 
     elif(message.arbitration_id == 1549):
-
         fl = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_FL']
         fr = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_FR']
         rl = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_RL']
         rr = db.decode_message(message.arbitration_id, message.data)['DOOR_OPEN_RR']
-        
-
         temp = str(fl) + " " + str(fr) + " " + str(rl) + " " + str(rr)
-
         print("Doors: " + temp)
 
     elif(message.arbitration_id == 856):
-
-
         l = db.decode_message(message.arbitration_id, message.data)['LEFT_BLINKER']
         r = db.decode_message(message.arbitration_id, message.data)['RIGHT_BLINKER']
-
         temp = str(l) + " " + str(r)
-
         print("Blinkers: " + temp)
-    #else:
-    #    print(message.arbitration_id)
 
 
 
